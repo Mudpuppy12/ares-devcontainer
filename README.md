@@ -34,7 +34,7 @@ The placeholder READMEs under those directories remind you to clone the upstream
 
 ## Workspace path note
 
-`postStartCommand` in `.devcontainer/devcontainer.json` creates symlinks under `/home/ares` using the path `/workspaces/<name>/...`. The checked-in configuration uses **`aiares`** as that folder name. If your Dev Container workspace is mounted under a different name, update `postStartCommand` so the paths match your actual workspace directory, or open this repo using a folder name that matches what the config expects.
+`postStartCommand` in `.devcontainer/devcontainer.json` creates symlinks under `/home/ares` into `aresmush/` and `ares-webportal/` using **`${containerWorkspaceFolder}`**, which Dev Containers expands to the workspace root inside the container (for example `/workspaces/ares-devcontainer` when you open this repo by that folder name). You do not need to edit paths for a different local folder name.
 
 ## Files of interest
 
