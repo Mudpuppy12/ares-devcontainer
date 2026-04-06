@@ -25,12 +25,23 @@ Keep the AresMUSH game and web portal as subfolders of this repo (as in this tem
 
 The placeholder READMEs under those directories remind you to clone the upstream repos after the container is available.
 
+**After cloning upstream `aresmush`:** do not skip the normal AresMUSH server install from the [official documentation](https://www.aresmush.com/)—for example aremush/bin/install. 
+
 ## Opening in Cursor
 
 1. Clone this repository and ensure `aresmush` and `ares-webportal` are populated (or clone them after the container starts into those paths).
 2. In Cursor, **File → Open Folder** and select this repository’s root (the folder that contains `.devcontainer/`).
 3. Run **Dev Containers: Reopen in Container** (command palette). Wait for the image build and `postCreate` / `postStart` steps to finish.
 4. Inside the container, follow normal AresMUSH setup for running the game and portal; nginx on port **80** is intended to sit in front of the portal and proxy API/WebSocket traffic.
+
+## nginx site configuration
+
+From the repository root inside the container, install the checked-in site config and restart nginx:
+
+```bash
+sudo cp nginx.default /etc/nginx/sites-enabled/default
+sudo service nginx restart
+```
 
 ## Workspace path note
 
