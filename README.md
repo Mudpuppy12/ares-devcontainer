@@ -4,6 +4,8 @@ This repository provides a **Dev Container** configuration for developing **[Are
 
 The container image is based on Ubuntu (Jammy), adds an `ares` user with passwordless `sudo`, and installs the runtimes and services typically needed for the game engine, API, and web portal.
 
+**Warning:** **Rebuilding or recreating** the Dev Container (for example **Dev Containers: Rebuild Container**) replaces the container’s filesystem. Anything stored only inside the container is **lost**—including Redis data, databases or uploads kept outside the mounted workspace, and one-off changes under paths such as `/etc` or `/home/ares` that are not part of your repo. Files in the workspace folder on your machine are usually unchanged because that directory is bind-mounted, but treat the container as **ephemeral**: back up anything you care about, and keep durable game or portal data in the repo or another persistent volume if you need it to survive rebuilds.
+
 ## What you get
 
 - **Ruby** (3.3.x), **Node.js** (18.x), **Python**, **Git**, and **Azure CLI** (via Dev Container features)
@@ -25,7 +27,7 @@ Keep the AresMUSH game and web portal as subfolders of this repo (as in this tem
 
 The placeholder READMEs under those directories remind you to clone the upstream repos after the container is available.
 
-**After cloning upstream `aresmush`:** do not skip the normal AresMUSH server install from the [official documentation](https://www.aresmush.com/)—for example aremush/bin/install. 
+**After cloning upstream `aresmush`:** do not skip the normal AresMUSH server install from the [official documentation](https://www.aresmush.com/)—for example `aresmush/bin/install`. When install completes, you still need to **start the AresMUSH game server** using whatever command the upstream project documents (for example `aresmush/bin/start`); install sets things up but does not keep the server running.
 
 ## Opening in Cursor
 
