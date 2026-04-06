@@ -1,0 +1,43 @@
+{
+  "name": "Ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.3.6"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18.20.8"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "os-provided"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "krish-r.vscode-toggle-terminal"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "python.defaultInterpreterPath": "/usr/local/python/current/bin/python"
+      }
+    }
+  },
+  "onCreateCommand": "sudo bash -lc 'usermod -aG ares vscode 2>/dev/null || true; chmod -R g+rwX,o-rwx /home/ares; chmod g+s /home/ares'",
+  "postCreateCommand": "curl -1sLf 'https://dl.cloudsmith.io/public/tofuutils/tenv/cfg/setup/bash.deb.sh' | sudo bash && sudo apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y tenv python-is-python3 nginx redis-server && sudo usermod -aG ares www-data && sudo chmod -R a+rX /var/www/html",
+  "postStartCommand": "ln -sfn /workspaces/aiares/aresmush /home/ares/aresmush && ln -sfn /workspaces/aiares/ares-webportal /home/ares/ares-webportal && sudo service nginx start && sudo service redis-server start",
+  "forwardPorts": [80],
+  "portsAttributes": {
+    "80": {
+      "label": "nginx",
+      "onAutoForward": "notify"
+    }
+  },
+  "remoteUser": "ares"
+}
+
